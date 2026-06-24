@@ -6,7 +6,7 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-20 bg-black text-center">
+      <section className="py-14 md:py-20 bg-black text-center">
         <div className="container mx-auto px-6 max-w-2xl">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Get in touch</h1>
           <p className="text-gray-400 text-lg">
@@ -15,9 +15,9 @@ export default function ContactPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-14 md:py-20 bg-white">
         <div className="container mx-auto px-6 max-w-5xl">
-          <div className="grid md:grid-cols-2 gap-16">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16">
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-8">Send us a message</h2>
 
