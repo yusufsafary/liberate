@@ -51,13 +51,13 @@ const features = [
 export default function FeaturesPage() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-24 bg-black text-center">
+      <section className="py-14 md:py-24 bg-black text-center">
         <div className="container mx-auto px-6 max-w-3xl">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Everything you need to build AI agents</h1>
           <p className="text-xl text-gray-400 leading-relaxed">
             From a simple question-answering bot to a fully autonomous multi-step workflow, Liberate Studio gives you the tools to build it without writing a line of code.
           </p>
-          <div className="flex gap-4 justify-center mt-8">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mt-8">
             <Link to="/docs" className="bg-white text-black hover:bg-gray-100 px-7 py-3.5 rounded-full text-sm font-semibold transition-colors">
               Get started free
             </Link>
@@ -68,7 +68,7 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((f, i) => (
@@ -84,7 +84,7 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 md:py-20 bg-gray-50">
         <div className="container mx-auto px-6 max-w-4xl text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Compare plans</h2>
           <p className="text-gray-600 mb-8">All features are available on every plan. The difference is run volume and support level.</p>
