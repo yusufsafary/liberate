@@ -59,7 +59,7 @@ const sdks = [
 export default function APIReferencePage() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-20 bg-black">
+      <section className="py-14 md:py-20 bg-black">
         <div className="container mx-auto px-6 max-w-4xl text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">API Reference</h1>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
@@ -68,15 +68,15 @@ export default function APIReferencePage() {
         </div>
       </section>
 
-      <section className="py-16 bg-white border-b border-gray-100">
+      <section className="py-10 md:py-16 bg-white border-b border-gray-100">
         <div className="container mx-auto px-6 max-w-5xl">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Authentication</h2>
           <p className="text-gray-600 leading-relaxed mb-6">
             All API requests require an API key passed in the Authorization header. You can generate API keys from your account settings under the API tab.
           </p>
-          <div className="bg-gray-950 rounded-2xl p-6 font-mono text-sm overflow-x-auto">
+          <div className="bg-gray-950 rounded-2xl p-5 md:p-6 font-mono text-sm overflow-x-auto">
             <div className="text-gray-500 mb-2">Request header</div>
-            <div className="text-green-400">Authorization: Bearer <span className="text-white">ls_live_your_api_key_here</span></div>
+            <div className="text-green-400 whitespace-nowrap">Authorization: Bearer <span className="text-white">ls_live_your_api_key_here</span></div>
           </div>
           <p className="text-gray-500 text-sm mt-4">
             Keep your API keys secret. Do not commit them to version control or expose them in client-side code. Use environment variables to manage keys in your deployment environment.
@@ -84,17 +84,17 @@ export default function APIReferencePage() {
         </div>
       </section>
 
-      <section className="py-16 bg-white">
+      <section className="py-10 md:py-16 bg-white">
         <div className="container mx-auto px-6 max-w-5xl">
           <h2 className="text-2xl font-bold text-gray-900 mb-8">Endpoints</h2>
           <div className="space-y-4">
             {endpoints.map((ep, i) => (
               <div key={i} className="rounded-xl border border-gray-200 p-5 hover:border-gray-400 transition-colors">
                 <div className="flex flex-wrap items-center gap-3 mb-2">
-                  <span className={`text-xs font-bold px-2.5 py-1 rounded font-mono ${methodColors[ep.method]}`}>
+                  <span className={`text-xs font-bold px-2.5 py-1 rounded font-mono shrink-0 ${methodColors[ep.method]}`}>
                     {ep.method}
                   </span>
-                  <code className="text-gray-800 text-sm font-mono">{ep.path}</code>
+                  <code className="text-gray-800 text-sm font-mono break-all">{ep.path}</code>
                 </div>
                 <p className="text-gray-600 text-sm leading-relaxed">{ep.description}</p>
               </div>
@@ -103,7 +103,7 @@ export default function APIReferencePage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gray-50">
+      <section className="py-10 md:py-16 bg-gray-50">
         <div className="container mx-auto px-6 max-w-5xl">
           <h2 className="text-2xl font-bold text-gray-900 mb-8">Client libraries</h2>
           <div className="grid sm:grid-cols-2 gap-5">
@@ -111,7 +111,7 @@ export default function APIReferencePage() {
               <div key={i} className="bg-white rounded-2xl border border-gray-200 p-6">
                 <div className="flex items-center justify-between gap-4 mb-2">
                   <h3 className="font-semibold text-gray-900">{sdk.name}</h3>
-                  <span className={`text-xs px-2.5 py-1 rounded-full font-medium ${sdk.status === "Stable" ? "bg-black text-white" : "bg-gray-100 text-gray-600"}`}>
+                  <span className={`text-xs px-2.5 py-1 rounded-full font-medium shrink-0 ${sdk.status === "Stable" ? "bg-black text-white" : "bg-gray-100 text-gray-600"}`}>
                     {sdk.status}
                   </span>
                 </div>
@@ -122,7 +122,7 @@ export default function APIReferencePage() {
         </div>
       </section>
 
-      <section className="py-16 bg-white border-t border-gray-100">
+      <section className="py-10 md:py-16 bg-white border-t border-gray-100">
         <div className="container mx-auto px-6 max-w-5xl">
           <h2 className="text-2xl font-bold text-gray-900 mb-6">Rate limits</h2>
           <div className="grid sm:grid-cols-3 gap-6 mb-8">
@@ -146,11 +146,11 @@ export default function APIReferencePage() {
         </div>
       </section>
 
-      <section className="py-16 bg-black text-center">
+      <section className="py-10 md:py-16 bg-black text-center">
         <div className="container mx-auto px-6 max-w-2xl">
           <h2 className="text-2xl font-bold text-white mb-3">Need help with the API?</h2>
           <p className="text-gray-400 mb-6">Our developer community and support team are here to help you integrate smoothly.</p>
-          <div className="flex gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
             <Link to="/community" className="bg-white text-black hover:bg-gray-100 px-6 py-3 rounded-full text-sm font-semibold transition-colors">
               Join the community
             </Link>
