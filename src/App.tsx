@@ -263,7 +263,7 @@ function WorkflowDemo() {
 
 function Hero() {
   return (
-    <section className="relative pt-32 pb-20 md:pt-40 md:pb-32 overflow-hidden bg-black">
+    <section className="relative pt-10 pb-16 md:pt-20 md:pb-28 overflow-hidden bg-black">
       <div className="absolute top-0 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
 
@@ -279,12 +279,6 @@ function Hero() {
             <p className="text-lg text-gray-400 mb-8 max-w-xl mx-auto lg:mx-0">
               Build powerful, autonomous AI agents for your business without writing a single line of code. Connect models, automate workflows, and deploy in minutes.
             </p>
-
-            <div className="flex items-center justify-center lg:justify-start gap-3 mb-10">
-              <div className="w-2 h-2 rounded-full bg-white" />
-              <div className="w-2 h-2 rounded-full bg-white/30" />
-              <div className="w-2 h-2 rounded-full bg-white/30" />
-            </div>
 
             <Link
               to="/docs"
@@ -348,9 +342,9 @@ function Testimonials() {
         <h2 className="text-3xl font-bold text-gray-900">Loved by builders everywhere</h2>
       </div>
 
-      <div className="flex flex-col gap-6 relative">
-        <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
+      <div className="flex flex-col gap-6 relative" style={{ overflow: 'hidden' }}>
+        <div className="absolute left-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none" />
+        <div className="absolute right-0 top-0 bottom-0 w-16 md:w-32 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
 
         <div className="flex gap-6 w-[200%] animate-[marquee-left_40s_linear_infinite]">
           {row1.map((t, i) => (
@@ -370,7 +364,7 @@ function Testimonials() {
           ))}
         </div>
 
-        <div className="flex gap-6 w-[200%] animate-[marquee-right_40s_linear_infinite] ml-[-50%]">
+        <div className="flex gap-6 w-[200%] animate-[marquee-right_40s_linear_infinite]" style={{ transform: 'translateX(-50%)' }}>
           {row2.map((t, i) => (
             <div key={i} className="flex-none w-[350px] bg-white rounded-2xl p-6 border border-gray-200 shadow-sm flex flex-col">
               <div className="h-8 w-24 bg-black rounded mb-4 flex items-center justify-center text-white text-xs font-bold tracking-wider">{t.company}</div>
@@ -555,9 +549,7 @@ function Layout({ children }: { children: React.ReactNode }) {
 function HomePage() {
   return (
     <>
-      <div className="pt-0 -mt-[72px]">
-        <Hero />
-      </div>
+      <Hero />
       <CallToAction />
       <Testimonials />
     </>
@@ -572,7 +564,7 @@ export default function App() {
         <Route path="/" element={
           <div className="min-h-screen bg-white font-sans">
             <Navbar />
-            <main><HomePage /></main>
+            <main className="pt-[72px]"><HomePage /></main>
             <Footer />
           </div>
         } />
