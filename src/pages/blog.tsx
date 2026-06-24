@@ -55,20 +55,20 @@ const categoryColors: Record<string, string> = {
 export default function BlogPage() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-20 bg-black text-center">
+      <section className="py-14 md:py-20 bg-black text-center">
         <div className="container mx-auto px-6 max-w-3xl">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">The Liberate Studio Blog</h1>
           <p className="text-gray-400 text-lg">Product updates, engineering deep dives, and stories from our customers.</p>
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-14 md:py-20 bg-white">
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="grid md:grid-cols-2 gap-8">
             {posts.map((post, i) => (
               <article key={i} className={`rounded-2xl border border-gray-200 overflow-hidden hover:shadow-lg transition-shadow ${i === 0 ? "md:col-span-2" : ""}`}>
                 <div className="p-8">
-                  <div className="flex items-center gap-3 mb-4">
+                  <div className="flex flex-wrap items-center gap-3 mb-4">
                     <span className={`text-xs font-semibold px-3 py-1 rounded-full ${categoryColors[post.category] || "bg-gray-100 text-gray-800"}`}>
                       {post.category}
                     </span>
@@ -89,11 +89,11 @@ export default function BlogPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gray-50 text-center">
+      <section className="py-12 md:py-16 bg-gray-50 text-center">
         <div className="container mx-auto px-6 max-w-xl">
           <h2 className="text-2xl font-bold text-gray-900 mb-3">Stay in the loop</h2>
           <p className="text-gray-600 mb-6">Get new posts delivered to your inbox. No spam. Unsubscribe any time.</p>
-          <div className="flex gap-3 max-w-md mx-auto">
+          <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input
               type="email"
               placeholder="you@company.com"
