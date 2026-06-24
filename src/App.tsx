@@ -257,14 +257,24 @@ function WorkflowDemo() {
 }
 
 // ─── Video Section ────────────────────────────────────────────────────────────
-// To replace the placeholder with a real video:
-//   YouTube:  set VIDEO_EMBED_URL = "https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=0&rel=0"
-//   Vimeo:    set VIDEO_EMBED_URL = "https://player.vimeo.com/video/YOUR_VIDEO_ID"
-//   Self-hosted: swap the <iframe> for a <video> tag pointing to your file
-const VIDEO_EMBED_URL = "https://www.youtube.com/embed/eMf4oxjvbHw"; // "Build Your First AI Automation Workflow in 14 Minutes (No code)"
+// To swap in your own video, change VIDEO_EMBED_URL:
+//   YouTube:  "https://www.youtube.com/embed/YOUR_VIDEO_ID"
+//   Vimeo:    "https://player.vimeo.com/video/YOUR_VIDEO_ID"
+const VIDEO_EMBED_URL = "https://www.youtube.com/embed/eMf4oxjvbHw";
+const VIDEO_TITLE = "Build Your First AI Automation Workflow in 14 Minutes (No code)";
+
+// Extracts YouTube video ID from embed URL so we can load the official thumbnail.
+function getYouTubeId(url: string): string | null {
+  const m = url.match(/youtube\.com\/embed\/([^?&]+)/);
+  return m ? m[1] : null;
+}
 
 function VideoSection() {
   const [playing, setPlaying] = useState(false);
+  const [thumbLoaded, setThumbLoaded] = useState(false);
+  const ytId = getYouTubeId(VIDEO_EMBED_URL);
+  const thumbUrl = ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : null;
+  const fallbackThumb = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : null;
 
   return (
     <section className="py-16 md:py-24 bg-black">
@@ -279,35 +289,43 @@ function VideoSection() {
         <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl aspect-video bg-gray-950">
           {VIDEO_EMBED_URL && playing ? (
             <iframe
-              src={`${VIDEO_EMBED_URL}${VIDEO_EMBED_URL.includes('?') ? '&' : '?'}autoplay=1`}
-              title="Liberate Studio product demo"
+              src={`${VIDEO_EMBED_URL}?autoplay=1&rel=0`}
+              title={VIDEO_TITLE}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               className="absolute inset-0 w-full h-full"
             />
           ) : (
-            /* Placeholder — replace bg-gray-900 with a real thumbnail image once available */
-            <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-900">
-              {/* Decorative grid */}
-              <div
-                className="absolute inset-0 opacity-10"
-                style={{
-                  backgroundImage: "linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)",
-                  backgroundSize: "40px 40px",
-                }}
-              />
-              {/* Center content */}
-              <div className="relative z-10 text-center px-6">
-                <button
-                  onClick={() => VIDEO_EMBED_URL ? setPlaying(true) : undefined}
-                  className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center mx-auto mb-5 shadow-2xl transition-transform ${VIDEO_EMBED_URL ? "hover:scale-110 cursor-pointer" : "cursor-default opacity-60"}`}
-                  aria-label="Play video"
-                >
+            <div
+              className="absolute inset-0 flex items-center justify-center cursor-pointer group"
+              onClick={() => setPlaying(true)}
+              role="button"
+              aria-label={`Play: ${VIDEO_TITLE}`}
+            >
+              {/* YouTube thumbnail image */}
+              {thumbUrl && (
+                <img
+                  src={thumbUrl}
+                  alt={VIDEO_TITLE}
+                  className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${thumbLoaded ? "opacity-100" : "opacity-0"}`}
+                  onLoad={() => setThumbLoaded(true)}
+                  onError={(e) => {
+                    if (fallbackThumb && (e.target as HTMLImageElement).src !== fallbackThumb) {
+                      (e.target as HTMLImageElement).src = fallbackThumb;
+                    }
+                  }}
+                />
+              )}
+              {/* Dark overlay so play button is always visible */}
+              <div className="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors" />
+              {/* Play button + title */}
+              <div className="relative z-10 flex flex-col items-center gap-4 px-6 text-center">
+                <div className="w-16 h-16 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
                   <Play size={28} className="text-black ml-1" fill="black" />
-                </button>
-                <p className="text-white/50 text-sm">
-                  {VIDEO_EMBED_URL ? "Click to watch the demo" : "Video coming soon — check back shortly"}
-                </p>
+                </div>
+                <span className="text-white text-sm font-medium drop-shadow max-w-xs md:max-w-sm line-clamp-2">
+                  {VIDEO_TITLE}
+                </span>
               </div>
             </div>
           )}
