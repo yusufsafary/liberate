@@ -26,6 +26,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    // GitHub Pages SPA path restore
+    (function () {
+      var params = new URLSearchParams(window.location.search);
+      var p = params.get('p');
+      if (p) {
+        params.delete('p');
+        var rest = params.toString();
+        window.history.replaceState(
+          null, null,
+          '/' + decodeURIComponent(p) + (rest ? '?' + rest : '') + window.location.hash
+        );
+      }
+    })();
+  </script>
   </head>
   <body>
     <div id="root"></div>

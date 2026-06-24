@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Liberate Studio</title>
+  <script>
+    // GitHub Pages SPA redirect — preserves path and hash for React Router
+    (function () {
+      var l = window.location;
+      var path = l.pathname.slice(1); // remove leading slash
+      if (path) {
+        l.replace(
+          l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+          '/?p=' + encodeURIComponent(path) +
+          (l.search ? '&' + l.search.slice(1) : '') +
+          l.hash
+        );
+      }
+    })();
+  </script>
+</head>
+<body></body>
+</html>
