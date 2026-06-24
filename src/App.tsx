@@ -358,23 +358,65 @@ function VideoSection() {
 }
 // ─────────────────────────────────────────────────────────────────────────────
 
-function GoogleIcon() {
-  return (
-    <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
-      <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
-      <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
-      <path d="M3.964 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/>
-      <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
-    </svg>
-  );
-}
+function HeroMagicLink() {
+  const [email, setEmail] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
+  const [sent, setSent] = React.useState(false);
+  const [error, setError] = React.useState<string | null>(null);
 
-async function signInWithGoogle() {
-  const { supabase: sb } = await import("./lib/supabase");
-  await sb.auth.signInWithOAuth({
-    provider: "google",
-    options: { redirectTo: window.location.origin + "/auth/callback" },
-  });
+  async function handleSend(e: React.FormEvent) {
+    e.preventDefault();
+    if (!email.trim()) return;
+    setLoading(true);
+    setError(null);
+    const { supabase: sb } = await import("./lib/supabase");
+    const { error: err } = await sb.auth.signInWithOtp({
+      email: email.trim(),
+      options: { emailRedirectTo: window.location.origin + "/auth/callback" },
+    });
+    setLoading(false);
+    if (err) { setError(err.message); } else { setSent(true); }
+  }
+
+  if (sent) {
+    return (
+      <div className="flex items-center gap-2 text-sm text-green-400 py-1">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        Magic link dikirim ke <span className="font-medium text-white">{email}</span>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSend} className="w-full">
+      <div className="flex items-center gap-2 bg-white/10 border border-white/20 rounded-full px-2 py-1.5 focus-within:border-white/50 transition-colors">
+        <div className="pl-2 shrink-0">
+          <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+            <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
+            <path d="M3.964 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/>
+            <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+          </svg>
+        </div>
+        <input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="Masukkan email Gmail kamu..."
+          required
+          className="flex-1 bg-transparent text-white placeholder-white/40 text-sm outline-none py-1 min-w-0"
+        />
+        <button
+          type="submit"
+          disabled={loading || !email.trim()}
+          className="shrink-0 bg-white hover:bg-gray-100 disabled:bg-white/40 text-gray-900 text-xs font-semibold px-4 py-2 rounded-full transition-colors"
+        >
+          {loading ? "..." : "Kirim Link"}
+        </button>
+      </div>
+      {error && <p className="mt-2 text-red-400 text-xs pl-2">{error}</p>}
+    </form>
+  );
 }
 
 function Hero() {
@@ -396,20 +438,23 @@ function Hero() {
               Build powerful, autonomous AI agents for your business without writing a single line of code. Connect models, automate workflows, and deploy in minutes.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3">
+            <div className="flex flex-col items-center lg:items-start gap-4 w-full max-w-xl mx-auto lg:mx-0">
               <Link
                 to="/docs"
                 className="inline-block border border-white hover:bg-white hover:text-black text-white px-8 py-3 rounded-full text-sm font-medium transition-colors"
               >
                 Learn More
               </Link>
-              <button
-                onClick={signInWithGoogle}
-                className="inline-flex items-center gap-3 bg-white text-gray-800 px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors shadow-md"
+              <HeroMagicLink />
+              <a
+                href="https://x.com/liberatestudio_"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2.5 border border-white/20 hover:border-white/50 text-white/70 hover:text-white px-5 py-2.5 rounded-full text-sm font-medium transition-colors"
               >
-                <GoogleIcon />
-                Continue with Google
-              </button>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.253 5.622 5.911-5.622zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                @liberatestudio_
+              </a>
             </div>
           </div>
 
