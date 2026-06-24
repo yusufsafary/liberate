@@ -10,7 +10,7 @@ const values = [
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-24 bg-black">
+      <section className="py-14 md:py-24 bg-black">
         <div className="container mx-auto px-6 max-w-4xl text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
             We believe AI should work for everyone
@@ -21,9 +21,9 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="container mx-auto px-6 max-w-5xl">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-start md:items-center">
             <div>
               <h2 className="text-3xl font-bold text-gray-900 mb-6">Our story</h2>
               <p className="text-gray-600 leading-relaxed mb-4">
@@ -36,7 +36,7 @@ export default function AboutPage() {
                 Today, thousands of teams use Liberate Studio to power customer support agents, content pipelines, data analysis workflows, and much more. We are just getting started.
               </p>
             </div>
-            <div className="bg-gray-50 rounded-3xl p-10 text-center">
+            <div className="bg-gray-50 rounded-3xl p-8 md:p-10 text-center">
               <div className="text-5xl font-bold text-gray-900 mb-2">2023</div>
               <div className="text-gray-500 mb-8">Founded</div>
               <div className="grid grid-cols-2 gap-8">
@@ -62,7 +62,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-gray-50">
+      <section className="py-14 md:py-24 bg-gray-50">
         <div className="container mx-auto px-6 max-w-5xl">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">What we stand for</h2>
           <div className="grid md:grid-cols-2 gap-8">
@@ -76,7 +76,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-black text-center">
+      <section className="py-14 md:py-24 bg-black text-center">
         <div className="container mx-auto px-6 max-w-2xl">
           <h2 className="text-3xl font-bold text-white mb-6">Come build with us</h2>
           <p className="text-gray-400 mb-8">We are a small team with a big mission. If this resonates with you, we would love to meet you.</p>
