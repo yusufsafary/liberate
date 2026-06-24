@@ -38,7 +38,7 @@ const categories = [
 export default function IntegrationsPage() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-24 bg-black text-center">
+      <section className="py-14 md:py-24 bg-black text-center">
         <div className="container mx-auto px-6 max-w-3xl">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Connect with the tools you already use</h1>
           <p className="text-xl text-gray-400 leading-relaxed">
@@ -47,7 +47,7 @@ export default function IntegrationsPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="container mx-auto px-6 max-w-6xl">
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {categories.map((cat, i) => (
@@ -67,7 +67,7 @@ export default function IntegrationsPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 md:py-20 bg-gray-50">
         <div className="container mx-auto px-6 max-w-4xl">
           <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">Connect any API in minutes</h2>
           <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
@@ -89,7 +89,7 @@ export default function IntegrationsPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-black text-center">
+      <section className="py-12 md:py-16 bg-black text-center">
         <div className="container mx-auto px-6 max-w-2xl">
           <h2 className="text-3xl font-bold text-white mb-4">Request an integration</h2>
           <p className="text-gray-400 mb-6">Can't find what you need? Let us know and we will prioritize it on our roadmap.</p>
