@@ -42,7 +42,7 @@ const sections = [
 export default function DocsPage() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-20 bg-black">
+      <section className="py-14 md:py-20 bg-black">
         <div className="container mx-auto px-6 max-w-4xl text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Documentation</h1>
           <p className="text-gray-400 text-lg">Everything you need to build, deploy, and manage AI agents on Liberate Studio.</p>
@@ -58,7 +58,7 @@ export default function DocsPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-14 md:py-20 bg-white">
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="space-y-16">
             {sections.map((section, i) => (
@@ -83,10 +83,10 @@ export default function DocsPage() {
             ))}
           </div>
 
-          <div className="mt-16 bg-gray-50 rounded-3xl p-10 text-center">
+          <div className="mt-16 bg-gray-50 rounded-3xl p-8 md:p-10 text-center">
             <h2 className="text-2xl font-bold text-gray-900 mb-3">Need more help?</h2>
             <p className="text-gray-600 mb-6">Our support team and community are here to help you get unstuck.</p>
-            <div className="flex gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
               <Link to="/help" className="bg-black text-white hover:bg-gray-800 px-6 py-3 rounded-full text-sm font-semibold transition-colors">
                 Help Center
               </Link>
