@@ -24,13 +24,8 @@ import { supabase } from "./lib/supabase";
 import type { User } from "@supabase/supabase-js";
 
 export function Logo({ size = "md" }: { size?: "sm" | "md" }) {
-  const textSize = size === "sm" ? "text-base" : "text-xl";
-  return (
-    <div className={`flex items-baseline gap-[3px] font-black tracking-[-0.04em] select-none ${textSize}`}>
-      <span className="text-black uppercase">Liberate</span>
-      <span className="text-black uppercase font-light tracking-widest text-[0.65em] ml-1">STUDIO</span>
-    </div>
-  );
+  const h = size === "sm" ? "h-7" : "h-9";
+  return <img src="/liberate-logo.png" alt="Liberate Studio" className={`${h} w-auto object-contain`} />;
 }
 
 export function LogoWhite({ size = "md" }: { size?: "sm" | "md" }) {
@@ -363,6 +358,25 @@ function VideoSection() {
 }
 // ─────────────────────────────────────────────────────────────────────────────
 
+function GoogleIcon() {
+  return (
+    <svg width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#4285F4"/>
+      <path d="M9 18c2.43 0 4.467-.806 5.956-2.184l-2.908-2.258c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/>
+      <path d="M3.964 10.707A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.707V4.961H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.039l3.007-2.332z" fill="#FBBC05"/>
+      <path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.961L3.964 7.293C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/>
+    </svg>
+  );
+}
+
+async function signInWithGoogle() {
+  const { supabase: sb } = await import("./lib/supabase");
+  await sb.auth.signInWithOAuth({
+    provider: "google",
+    options: { redirectTo: window.location.origin + "/auth/callback" },
+  });
+}
+
 function Hero() {
   return (
     <section className="relative pt-10 pb-16 md:pt-20 md:pb-28 overflow-hidden bg-black">
@@ -382,12 +396,21 @@ function Hero() {
               Build powerful, autonomous AI agents for your business without writing a single line of code. Connect models, automate workflows, and deploy in minutes.
             </p>
 
-            <Link
-              to="/docs"
-              className="inline-block border border-white hover:bg-white hover:text-black text-white px-8 py-3 rounded-full text-sm font-medium transition-colors"
-            >
-              Learn More
-            </Link>
+            <div className="flex flex-col sm:flex-row items-center gap-3">
+              <Link
+                to="/docs"
+                className="inline-block border border-white hover:bg-white hover:text-black text-white px-8 py-3 rounded-full text-sm font-medium transition-colors"
+              >
+                Learn More
+              </Link>
+              <button
+                onClick={signInWithGoogle}
+                className="inline-flex items-center gap-3 bg-white text-gray-800 px-6 py-3 rounded-full text-sm font-medium hover:bg-gray-100 transition-colors shadow-md"
+              >
+                <GoogleIcon />
+                Continue with Google
+              </button>
+            </div>
           </div>
 
           <div className="flex-1 w-full max-w-2xl">
