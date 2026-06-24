@@ -17,6 +17,11 @@ import HelpPage from "./pages/help";
 import CommunityPage from "./pages/community";
 import APIReferencePage from "./pages/api-reference";
 import NotFound from "./pages/not-found";
+import LoginPage from "./pages/login";
+import AuthCallbackPage from "./pages/auth-callback";
+import DashboardPage from "./pages/dashboard";
+import { supabase } from "./lib/supabase";
+import type { User } from "@supabase/supabase-js";
 
 export function Logo({ size = "md" }: { size?: "sm" | "md" }) {
   const textSize = size === "sm" ? "text-base" : "text-xl";
@@ -50,7 +55,14 @@ function Navbar() {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [user, setUser] = useState<User | null>(null);
   const location = useLocation();
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data }) => setUser(data.session?.user ?? null));
+    const { data: sub } = supabase.auth.onAuthStateChange((_e, session) => setUser(session?.user ?? null));
+    return () => sub.subscription.unsubscribe();
+  }, []);
 
   useEffect(() => {
     setMenuOpen(false);
@@ -102,9 +114,15 @@ function Navbar() {
         </div>
 
         <div className="flex items-center gap-3">
-          <a href="#" className="hidden md:block text-sm font-medium text-gray-700 hover:text-black transition-colors">
-            Log in
-          </a>
+          {user ? (
+            <Link to="/dashboard" className="hidden md:block text-sm font-medium text-gray-700 hover:text-black transition-colors">
+              Dashboard
+            </Link>
+          ) : (
+            <Link to="/login" className="hidden md:block text-sm font-medium text-gray-700 hover:text-black transition-colors">
+              Log in
+            </Link>
+          )}
           <Link
             to="/features"
             className="hidden sm:inline-block bg-black hover:bg-gray-800 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors"
@@ -141,12 +159,21 @@ function Navbar() {
               </Link>
             ))}
             <div className="flex flex-col gap-3 pt-4">
-              <a
-                href="#"
-                className="text-center py-3 text-base font-medium text-gray-700 border border-gray-200 rounded-full hover:bg-gray-50 transition-colors"
-              >
-                Log in
-              </a>
+              {user ? (
+                <Link
+                  to="/dashboard"
+                  className="text-center py-3 text-base font-medium text-gray-700 border border-gray-200 rounded-full hover:bg-gray-50 transition-colors"
+                >
+                  Dashboard
+                </Link>
+              ) : (
+                <Link
+                  to="/login"
+                  className="text-center py-3 text-base font-medium text-gray-700 border border-gray-200 rounded-full hover:bg-gray-50 transition-colors"
+                >
+                  Log in
+                </Link>
+              )}
               <Link
                 to="/features"
                 className="text-center py-3 text-base font-medium text-white bg-black rounded-full hover:bg-gray-800 transition-colors"
@@ -658,6 +685,9 @@ export default function App() {
         <Route path="/help" element={<Layout><HelpPage /></Layout>} />
         <Route path="/community" element={<Layout><CommunityPage /></Layout>} />
         <Route path="/api-reference" element={<Layout><APIReferencePage /></Layout>} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/auth/callback" element={<AuthCallbackPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="*" element={<Layout><NotFound /></Layout>} />
       </Routes>
     </>

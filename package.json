@@ -10,7 +10,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "react-router-dom": "^7.18.0"
+    "react-router-dom": "^7.18.0",
+    "@supabase/supabase-js": "^2.49.8"
   },
   "devDependencies": {
     "@hookform/resolvers": "^3.10.0",
