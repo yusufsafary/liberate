@@ -40,7 +40,7 @@ const useCases = [
 export default function WorkflowAutomationPage() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-24 bg-black">
+      <section className="py-14 md:py-24 bg-black">
         <div className="container mx-auto px-6 max-w-4xl text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Automate any workflow with AI</h1>
           <p className="text-xl text-gray-400 leading-relaxed">
@@ -49,13 +49,13 @@ export default function WorkflowAutomationPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="container mx-auto px-6 max-w-4xl">
-          <h2 className="text-3xl font-bold text-gray-900 mb-16 text-center">How it works</h2>
-          <div className="space-y-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 md:mb-16 text-center">How it works</h2>
+          <div className="space-y-10 md:space-y-12">
             {steps.map((s, i) => (
-              <div key={i} className="flex gap-8 items-start">
-                <div className="w-14 h-14 rounded-2xl bg-black text-white flex items-center justify-center text-xl font-bold shrink-0">
+              <div key={i} className="flex gap-4 md:gap-8 items-start">
+                <div className="w-12 h-12 md:w-14 md:h-14 rounded-2xl bg-black text-white flex items-center justify-center text-lg md:text-xl font-bold shrink-0">
                   {s.step}
                 </div>
                 <div>
@@ -68,7 +68,7 @@ export default function WorkflowAutomationPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-gray-50">
+      <section className="py-14 md:py-24 bg-gray-50">
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">What teams are building</h2>
           <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
@@ -85,7 +85,7 @@ export default function WorkflowAutomationPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-black text-center">
+      <section className="py-12 md:py-20 bg-black text-center">
         <div className="container mx-auto px-6 max-w-2xl">
           <h2 className="text-3xl font-bold text-white mb-4">Start building your first workflow</h2>
           <p className="text-gray-400 mb-8">Free to start. No credit card required. Your first workflow can be live in under 30 minutes.</p>
