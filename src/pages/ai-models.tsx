@@ -14,7 +14,7 @@ const providers = [
 export default function AIModelsPage() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-24 bg-black text-center">
+      <section className="py-14 md:py-24 bg-black text-center">
         <div className="container mx-auto px-6 max-w-3xl">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Access 200+ AI models from a single platform</h1>
           <p className="text-xl text-gray-400 leading-relaxed">
@@ -23,7 +23,7 @@ export default function AIModelsPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-white border-b border-gray-100">
+      <section className="py-10 md:py-16 bg-white border-b border-gray-100">
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 text-center">
             {[
@@ -41,7 +41,7 @@ export default function AIModelsPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="container mx-auto px-6 max-w-6xl">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Models by provider</h2>
           <div className="grid md:grid-cols-2 gap-8">
@@ -60,7 +60,7 @@ export default function AIModelsPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 md:py-20 bg-gray-50">
         <div className="container mx-auto px-6 max-w-4xl">
           <div className="grid md:grid-cols-3 gap-8 text-center">
             <div className="p-6">
@@ -79,7 +79,7 @@ export default function AIModelsPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-black text-center">
+      <section className="py-12 md:py-20 bg-black text-center">
         <div className="container mx-auto px-6 max-w-2xl">
           <h2 className="text-3xl font-bold text-white mb-4">Try any model for free</h2>
           <p className="text-gray-400 mb-8">Free accounts include access to a selection of models. Pro and Enterprise plans unlock every model in our catalog.</p>
