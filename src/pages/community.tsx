@@ -52,7 +52,7 @@ const events = [
 export default function CommunityPage() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-24 bg-black text-center">
+      <section className="py-14 md:py-24 bg-black text-center">
         <div className="container mx-auto px-6 max-w-3xl">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Join the Liberate Studio community</h1>
           <p className="text-xl text-gray-400 leading-relaxed">
@@ -61,7 +61,7 @@ export default function CommunityPage() {
         </div>
       </section>
 
-      <section className="py-24 bg-white">
+      <section className="py-14 md:py-24 bg-white">
         <div className="container mx-auto px-6 max-w-5xl">
           <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Where to find us</h2>
           <div className="grid md:grid-cols-2 gap-8">
@@ -82,14 +82,14 @@ export default function CommunityPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 md:py-20 bg-gray-50">
         <div className="container mx-auto px-6 max-w-4xl">
           <h2 className="text-3xl font-bold text-gray-900 mb-4 text-center">Upcoming events</h2>
-          <p className="text-gray-600 text-center mb-12">Live sessions, workshops, and showcases. All free and open to the community.</p>
+          <p className="text-gray-600 text-center mb-10 md:mb-12">Live sessions, workshops, and showcases. All free and open to the community.</p>
           <div className="space-y-6">
             {events.map((event, i) => (
-              <div key={i} className="bg-white rounded-2xl border border-gray-200 p-7 flex gap-6 items-start">
-                <div className="bg-black text-white rounded-xl px-4 py-3 text-center shrink-0 min-w-[80px]">
+              <div key={i} className="bg-white rounded-2xl border border-gray-200 p-6 md:p-7 flex gap-4 md:gap-6 items-start">
+                <div className="bg-black text-white rounded-xl px-3 md:px-4 py-3 text-center shrink-0 min-w-[68px] md:min-w-[80px]">
                   <div className="text-xs font-semibold tracking-wider">{event.date.split(" ")[0].slice(0, 3).toUpperCase()}</div>
                   <div className="text-xl font-bold">{event.date.split(" ")[1].replace(",", "")}</div>
                 </div>
@@ -104,7 +104,7 @@ export default function CommunityPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-black text-center">
+      <section className="py-12 md:py-20 bg-black text-center">
         <div className="container mx-auto px-6 max-w-2xl">
           <h2 className="text-3xl font-bold text-white mb-4">Share what you built</h2>
           <p className="text-gray-400 mb-6">Publish your workflow as a community template and help other builders get started faster. The most popular templates are featured in our gallery.</p>
