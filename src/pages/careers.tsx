@@ -50,7 +50,7 @@ const perks = [
 export default function CareersPage() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-24 bg-black text-center">
+      <section className="py-14 md:py-24 bg-black text-center">
         <div className="container mx-auto px-6 max-w-3xl">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">Join the team</h1>
           <p className="text-xl text-gray-400">
@@ -59,7 +59,7 @@ export default function CareersPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 md:py-20 bg-gray-50">
         <div className="container mx-auto px-6 max-w-3xl">
           <h2 className="text-2xl font-bold text-gray-900 mb-4 text-center">What we offer</h2>
           <div className="grid sm:grid-cols-2 gap-4 mt-8">
@@ -73,16 +73,16 @@ export default function CareersPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-6 max-w-4xl">
           <h2 className="text-2xl font-bold text-gray-900 mb-12 text-center">Open positions</h2>
           <div className="space-y-6">
             {roles.map((role, i) => (
-              <div key={i} className="border border-gray-200 rounded-2xl p-8 hover:shadow-md transition-shadow">
+              <div key={i} className="border border-gray-200 rounded-2xl p-6 md:p-8 hover:shadow-md transition-shadow">
                 <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                   <div>
                     <h3 className="text-xl font-semibold text-gray-900">{role.title}</h3>
-                    <div className="flex items-center gap-3 mt-2">
+                    <div className="flex flex-wrap items-center gap-2 mt-2">
                       <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">{role.team}</span>
                       <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">{role.location}</span>
                       <span className="text-sm text-gray-500 bg-gray-100 px-3 py-1 rounded-full">{role.type}</span>
