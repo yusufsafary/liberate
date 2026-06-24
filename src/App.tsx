@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, Link, useLocation } from "react-router-dom";
-import { ChevronDown, Play, CheckCircle2 } from "lucide-react";
+import { ChevronDown, Play, CheckCircle2, Menu, X } from "lucide-react";
 import { motion, useScroll } from "framer-motion";
 
 import AboutPage from "./pages/about";
@@ -49,53 +49,117 @@ function ScrollToTop() {
 function Navbar() {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
+
+  useEffect(() => {
+    setMenuOpen(false);
+  }, [location]);
 
   useEffect(() => {
     return scrollY.on("change", (latest) => {
       const previous = scrollY.getPrevious() || 0;
       if (latest > previous && latest > 150) {
         setHidden(true);
+        setMenuOpen(false);
       } else {
         setHidden(false);
       }
     });
   }, [scrollY]);
 
+  const navLinks = [
+    { to: "/features", label: "Product" },
+    { to: "/pricing", label: "Pricing" },
+    { to: "/docs", label: "Learn" },
+    { to: "/blog", label: "Blog" },
+    { to: "/about", label: "About" },
+  ];
+
   return (
-    <motion.nav
-      variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
-      animate={hidden ? "hidden" : "visible"}
-      transition={{ duration: 0.3, ease: "easeInOut" }}
-      className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between"
-    >
-      <Link to="/">
-        <Logo />
-      </Link>
-
-      <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
-        <Link to="/features" className="flex items-center gap-1 hover:text-black transition-colors">
-          Product <ChevronDown size={14} />
+    <>
+      <motion.nav
+        variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
+        animate={hidden ? "hidden" : "visible"}
+        transition={{ duration: 0.3, ease: "easeInOut" }}
+        className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between"
+      >
+        <Link to="/">
+          <Logo />
         </Link>
-        <Link to="/pricing" className="hover:text-black transition-colors">Pricing</Link>
-        <Link to="/docs" className="flex items-center gap-1 hover:text-black transition-colors">
-          Learn <ChevronDown size={14} />
-        </Link>
-        <Link to="/blog" className="hover:text-black transition-colors">Blog</Link>
-        <Link to="/about" className="hover:text-black transition-colors">About</Link>
-      </div>
 
-      <div className="flex items-center gap-4">
-        <a href="#" className="hidden sm:block text-sm font-medium text-gray-700 hover:text-black transition-colors">
-          Log in
-        </a>
-        <Link
-          to="/features"
-          className="bg-black hover:bg-gray-800 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors"
+        {/* Desktop nav */}
+        <div className="hidden md:flex items-center gap-8 text-sm font-medium text-gray-700">
+          <Link to="/features" className="flex items-center gap-1 hover:text-black transition-colors">
+            Product <ChevronDown size={14} />
+          </Link>
+          <Link to="/pricing" className="hover:text-black transition-colors">Pricing</Link>
+          <Link to="/docs" className="flex items-center gap-1 hover:text-black transition-colors">
+            Learn <ChevronDown size={14} />
+          </Link>
+          <Link to="/blog" className="hover:text-black transition-colors">Blog</Link>
+          <Link to="/about" className="hover:text-black transition-colors">About</Link>
+        </div>
+
+        <div className="flex items-center gap-3">
+          {/* Log in: visible on desktop, hidden on mobile (handled in mobile menu) */}
+          <a href="#" className="hidden md:block text-sm font-medium text-gray-700 hover:text-black transition-colors">
+            Log in
+          </a>
+          <Link
+            to="/features"
+            className="hidden sm:inline-block bg-black hover:bg-gray-800 text-white px-5 py-2 rounded-full text-sm font-medium transition-colors"
+          >
+            Get Started
+          </Link>
+          {/* Hamburger: visible only on mobile */}
+          <button
+            onClick={() => setMenuOpen((v) => !v)}
+            className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
+            aria-label={menuOpen ? "Tutup menu" : "Buka menu"}
+          >
+            {menuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
+      </motion.nav>
+
+      {/* Mobile dropdown menu */}
+      {menuOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -8 }}
+          transition={{ duration: 0.2 }}
+          className="fixed top-[65px] left-0 right-0 z-40 bg-white border-b border-gray-100 shadow-lg md:hidden"
         >
-          Get Started
-        </Link>
-      </div>
-    </motion.nav>
+          <div className="flex flex-col px-6 py-4 gap-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className="py-3 text-base font-medium text-gray-700 hover:text-black border-b border-gray-100 last:border-0 transition-colors"
+              >
+                {link.label}
+              </Link>
+            ))}
+            <div className="flex flex-col gap-3 pt-4">
+              <a
+                href="#"
+                className="text-center py-3 text-base font-medium text-gray-700 border border-gray-200 rounded-full hover:bg-gray-50 transition-colors"
+              >
+                Log in
+              </a>
+              <Link
+                to="/features"
+                className="text-center py-3 text-base font-medium text-white bg-black rounded-full hover:bg-gray-800 transition-colors"
+              >
+                Get Started
+              </Link>
+            </div>
+          </div>
+        </motion.div>
+      )}
+    </>
   );
 }
 
@@ -421,8 +485,8 @@ export function Footer() {
   return (
     <footer className="bg-black pt-16 pb-8">
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-16">
-          <div className="col-span-2 lg:col-span-2">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-16">
+          <div className="sm:col-span-2 lg:col-span-2">
             <div className="mb-4">
               <LogoWhite />
             </div>
