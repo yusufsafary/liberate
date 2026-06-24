@@ -65,14 +65,14 @@ function FAQItem({ question, answer }: { question: string; answer: string }) {
 export default function HelpPage() {
   return (
     <div className="min-h-screen bg-white">
-      <section className="py-20 bg-black text-center">
+      <section className="py-14 md:py-20 bg-black text-center">
         <div className="container mx-auto px-6 max-w-3xl">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Help Center</h1>
           <p className="text-gray-400 text-lg">Find answers to common questions or reach out and we will get back to you fast.</p>
         </div>
       </section>
 
-      <section className="py-16 bg-gray-50">
+      <section className="py-10 md:py-16 bg-gray-50">
         <div className="container mx-auto px-6 max-w-5xl">
           <div className="grid sm:grid-cols-3 gap-5">
             {[
@@ -93,7 +93,7 @@ export default function HelpPage() {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-14 md:py-20 bg-white">
         <div className="container mx-auto px-6 max-w-3xl">
           <h2 className="text-2xl font-bold text-gray-900 mb-2 text-center">Frequently asked questions</h2>
           <p className="text-gray-500 text-center mb-10">If your question is not here, reach out and we will answer it within one business day.</p>
@@ -105,7 +105,7 @@ export default function HelpPage() {
         </div>
       </section>
 
-      <section className="py-16 bg-gray-50 text-center">
+      <section className="py-10 md:py-16 bg-gray-50 text-center">
         <div className="container mx-auto px-6 max-w-xl">
           <h2 className="text-2xl font-bold text-gray-900 mb-3">Still need help?</h2>
           <p className="text-gray-600 mb-6">Our support team responds to all messages within one business day. Enterprise customers get a response within 15 minutes.</p>
