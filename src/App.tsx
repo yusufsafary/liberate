@@ -137,7 +137,8 @@ function WorkflowDemo() {
         </div>
       </div>
 
-      <div className="px-6 py-8 flex items-center justify-center gap-3">
+      {/* Mobile: vertical stack — Desktop: horizontal row */}
+      <div className="px-5 py-6 flex flex-col md:flex-row items-center justify-center gap-3">
         {nodes.map((node, i) => (
           <React.Fragment key={i}>
             <motion.div
@@ -146,19 +147,30 @@ function WorkflowDemo() {
                 backgroundColor: step > i ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.03)",
               }}
               transition={{ duration: 0.4 }}
-              className="border rounded-xl px-4 py-3 text-center min-w-[100px]"
+              className="border rounded-xl px-5 py-3 text-center w-full md:w-auto md:min-w-[100px]"
             >
               <div className="text-white/40 text-[10px] font-semibold tracking-wider mb-1">{node.label}</div>
-              <div className="text-white text-xs font-medium">{node.name}</div>
+              <div className="text-white text-sm md:text-xs font-medium">{node.name}</div>
             </motion.div>
             {i < nodes.length - 1 && (
-              <div className="flex items-center gap-0.5 shrink-0">
-                <motion.div
-                  animate={{ width: step > i ? "2rem" : "1.5rem", opacity: step > i ? 1 : 0.2 }}
-                  className="h-px bg-white"
-                />
-                <div className="w-0 h-0 border-t-[4px] border-b-[4px] border-l-[6px] border-t-transparent border-b-transparent border-l-white opacity-40" />
-              </div>
+              <>
+                {/* Vertical arrow on mobile */}
+                <div className="flex md:hidden flex-col items-center gap-0.5">
+                  <motion.div
+                    animate={{ height: step > i ? "1.5rem" : "1rem", opacity: step > i ? 1 : 0.2 }}
+                    className="w-px bg-white"
+                  />
+                  <div className="w-0 h-0 border-l-[4px] border-r-[4px] border-t-[6px] border-l-transparent border-r-transparent border-t-white opacity-40" />
+                </div>
+                {/* Horizontal arrow on desktop */}
+                <div className="hidden md:flex items-center gap-0.5 shrink-0">
+                  <motion.div
+                    animate={{ width: step > i ? "2rem" : "1.5rem", opacity: step > i ? 1 : 0.2 }}
+                    className="h-px bg-white"
+                  />
+                  <div className="w-0 h-0 border-t-[4px] border-b-[4px] border-l-[6px] border-t-transparent border-b-transparent border-l-white opacity-40" />
+                </div>
+              </>
             )}
           </React.Fragment>
         ))}
@@ -484,7 +496,6 @@ function HomePage() {
       </div>
       <CallToAction />
       <Testimonials />
-      <Pricing />
     </>
   );
 }
