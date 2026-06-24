@@ -1,0 +1,17 @@
+{
+  "name": "Liberate Studio",
+  "short_name": "Liberate",
+  "description": "Build powerful autonomous AI agents without writing a single line of code.",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "apple touch icon"
+    }
+  ],
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "display": "standalone",
+  "start_url": "/"
+}
