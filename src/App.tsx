@@ -261,7 +261,7 @@ function WorkflowDemo() {
 //   YouTube:  set VIDEO_EMBED_URL = "https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=0&rel=0"
 //   Vimeo:    set VIDEO_EMBED_URL = "https://player.vimeo.com/video/YOUR_VIDEO_ID"
 //   Self-hosted: swap the <iframe> for a <video> tag pointing to your file
-const VIDEO_EMBED_URL = ""; // leave empty to show placeholder
+const VIDEO_EMBED_URL = "https://www.youtube.com/embed/eMf4oxjvbHw"; // "Build Your First AI Automation Workflow in 14 Minutes (No code)"
 
 function VideoSection() {
   const [playing, setPlaying] = useState(false);
