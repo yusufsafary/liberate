@@ -24,7 +24,7 @@ import { supabase } from "./lib/supabase";
 import type { User } from "@supabase/supabase-js";
 
 export function Logo({ size = "md" }: { size?: "sm" | "md" }) {
-  const h = size === "sm" ? "h-8" : "h-14 sm:h-11";
+  const h = size === "sm" ? "h-8" : "h-20 sm:h-12";
   return <img src="/liberate-logo.png" alt="Liberate Studio" className={`${h} w-auto object-contain`} />;
 }
 
@@ -89,7 +89,7 @@ function Navbar() {
         variants={{ visible: { y: 0 }, hidden: { y: "-100%" } }}
         animate={hidden ? "hidden" : "visible"}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 px-6 py-4 flex items-center justify-between"
+        className="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-100 px-5 md:px-8 py-2 md:py-3 flex items-center justify-between"
       >
         <Link to="/">
           <Logo />
