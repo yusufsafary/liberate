@@ -102,7 +102,6 @@ function Navbar() {
         </div>
 
         <div className="flex items-center gap-3">
-          {/* Log in: visible on desktop, hidden on mobile (handled in mobile menu) */}
           <a href="#" className="hidden md:block text-sm font-medium text-gray-700 hover:text-black transition-colors">
             Log in
           </a>
@@ -112,7 +111,6 @@ function Navbar() {
           >
             Get Started
           </Link>
-          {/* Hamburger: visible only on mobile */}
           <button
             onClick={() => setMenuOpen((v) => !v)}
             className="md:hidden p-2 rounded-lg text-gray-700 hover:bg-gray-100 transition-colors"
@@ -201,7 +199,6 @@ function WorkflowDemo() {
         </div>
       </div>
 
-      {/* Mobile: vertical stack — Desktop: horizontal row */}
       <div className="px-5 py-6 flex flex-col md:flex-row items-center justify-center gap-3">
         {nodes.map((node, i) => (
           <React.Fragment key={i}>
@@ -218,7 +215,6 @@ function WorkflowDemo() {
             </motion.div>
             {i < nodes.length - 1 && (
               <>
-                {/* Vertical arrow on mobile */}
                 <div className="flex md:hidden flex-col items-center gap-0.5">
                   <motion.div
                     animate={{ height: step > i ? "1.5rem" : "1rem", opacity: step > i ? 1 : 0.2 }}
@@ -226,7 +222,6 @@ function WorkflowDemo() {
                   />
                   <div className="w-0 h-0 border-l-[4px] border-r-[4px] border-t-[6px] border-l-transparent border-r-transparent border-t-white opacity-40" />
                 </div>
-                {/* Horizontal arrow on desktop */}
                 <div className="hidden md:flex items-center gap-0.5 shrink-0">
                   <motion.div
                     animate={{ width: step > i ? "2rem" : "1.5rem", opacity: step > i ? 1 : 0.2 }}
@@ -260,6 +255,68 @@ function WorkflowDemo() {
     </div>
   );
 }
+
+// ─── Video Section ────────────────────────────────────────────────────────────
+// To replace the placeholder with a real video:
+//   YouTube:  set VIDEO_EMBED_URL = "https://www.youtube.com/embed/YOUR_VIDEO_ID?autoplay=0&rel=0"
+//   Vimeo:    set VIDEO_EMBED_URL = "https://player.vimeo.com/video/YOUR_VIDEO_ID"
+//   Self-hosted: swap the <iframe> for a <video> tag pointing to your file
+const VIDEO_EMBED_URL = ""; // leave empty to show placeholder
+
+function VideoSection() {
+  const [playing, setPlaying] = useState(false);
+
+  return (
+    <section className="py-16 md:py-24 bg-black">
+      <div className="container mx-auto px-6 max-w-5xl">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl md:text-4xl font-bold text-white mb-3">See it in action</h2>
+          <p className="text-gray-400 text-base md:text-lg max-w-xl mx-auto">
+            Watch how teams build and deploy AI agents in minutes with Liberate Studio.
+          </p>
+        </div>
+
+        <div className="relative rounded-2xl overflow-hidden border border-white/10 shadow-2xl aspect-video bg-gray-950">
+          {VIDEO_EMBED_URL && playing ? (
+            <iframe
+              src={`${VIDEO_EMBED_URL}${VIDEO_EMBED_URL.includes('?') ? '&' : '?'}autoplay=1`}
+              title="Liberate Studio product demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full"
+            />
+          ) : (
+            /* Placeholder — replace bg-gray-900 with a real thumbnail image once available */
+            <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-900">
+              {/* Decorative grid */}
+              <div
+                className="absolute inset-0 opacity-10"
+                style={{
+                  backgroundImage: "linear-gradient(rgba(255,255,255,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.2) 1px, transparent 1px)",
+                  backgroundSize: "40px 40px",
+                }}
+              />
+              {/* Center content */}
+              <div className="relative z-10 text-center px-6">
+                <button
+                  onClick={() => VIDEO_EMBED_URL ? setPlaying(true) : undefined}
+                  className={`w-16 h-16 md:w-20 md:h-20 rounded-full bg-white flex items-center justify-center mx-auto mb-5 shadow-2xl transition-transform ${VIDEO_EMBED_URL ? "hover:scale-110 cursor-pointer" : "cursor-default opacity-60"}`}
+                  aria-label="Play video"
+                >
+                  <Play size={28} className="text-black ml-1" fill="black" />
+                </button>
+                <p className="text-white/50 text-sm">
+                  {VIDEO_EMBED_URL ? "Click to watch the demo" : "Video coming soon — check back shortly"}
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+// ─────────────────────────────────────────────────────────────────────────────
 
 function Hero() {
   return (
@@ -550,6 +607,7 @@ function HomePage() {
   return (
     <>
       <Hero />
+      <VideoSection />
       <CallToAction />
       <Testimonials />
     </>
