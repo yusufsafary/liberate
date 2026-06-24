@@ -382,7 +382,7 @@ function HeroMagicLink() {
     return (
       <div className="flex items-center gap-2 text-sm text-green-400 py-1">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-        Magic link dikirim ke <span className="font-medium text-white">{email}</span>
+        Magic link sent to <span className="font-medium text-white">{email}</span>
       </div>
     );
   }
@@ -402,7 +402,7 @@ function HeroMagicLink() {
           type="email"
           value={email}
           onChange={e => setEmail(e.target.value)}
-          placeholder="Masukkan email Gmail kamu..."
+          placeholder="Enter your email address..."
           required
           className="flex-1 bg-transparent text-white placeholder-white/40 text-sm outline-none py-1 min-w-0"
         />
@@ -411,7 +411,7 @@ function HeroMagicLink() {
           disabled={loading || !email.trim()}
           className="shrink-0 bg-white hover:bg-gray-100 disabled:bg-white/40 text-gray-900 text-xs font-semibold px-4 py-2 rounded-full transition-colors"
         >
-          {loading ? "..." : "Kirim Link"}
+          {loading ? "Sending…" : "Get magic link"}
         </button>
       </div>
       {error && <p className="mt-2 text-red-400 text-xs pl-2">{error}</p>}
