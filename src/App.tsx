@@ -24,7 +24,7 @@ import { supabase } from "./lib/supabase";
 import type { User } from "@supabase/supabase-js";
 
 export function Logo({ size = "md" }: { size?: "sm" | "md" }) {
-  const h = size === "sm" ? "h-7" : "h-9";
+  const h = size === "sm" ? "h-8" : "h-14 sm:h-11";
   return <img src="/liberate-logo.png" alt="Liberate Studio" className={`${h} w-auto object-contain`} />;
 }
 
